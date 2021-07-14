@@ -1,14 +1,17 @@
 import AppProvider from 'hooks';
 import { AppProps } from 'next/app';
-import { GlobalStyles } from 'styles';
+import { GlobalStyle } from 'styles';
+import { AuthProvider } from '../context/AuthContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
-            <AppProvider>
-                <GlobalStyles />
-                <Component {...pageProps} />
-            </AppProvider>
+            <AuthProvider>
+                <AppProvider>
+                    <GlobalStyle />
+                    <Component {...pageProps} />
+                </AppProvider>
+            </AuthProvider>
         </>
     );
 }
