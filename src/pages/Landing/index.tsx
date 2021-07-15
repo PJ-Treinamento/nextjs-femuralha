@@ -1,9 +1,8 @@
 import React, { FormEvent, useContext, useState} from 'react';
 import Input from '../../components/input/index';
-import { Wrapper, WrapEsq, OutWrapEsq, WrapDir, OutWrapDir, Div_Input, Div_Label, Wrapper_Button, Logo } from './styles';
+import { Wrapper, OutWrapEsq, OutWrapDir, Div_Input, Div_Label, Wrapper_Button, Logo } from './styles';
 import api from '../../services/api';
-import fundoLoginDir from '../../assets/images/dir-login.svg'
-import fundoLoginEsq from '../../assets/images/esq-login_r.svg'
+import {setCookie} from 'nookies'
 import AuthContext from '../../context/AuthContext';
 
 
@@ -22,20 +21,21 @@ function Landing() {
 	}
 
 	const handleLogin = async (event: FormEvent) => {
+
 		event.preventDefault()
 		const response = await api.post('/sessions/login',
 		 { email: values.user, password: values.password })
 		const { token, user } = response.data
-		localStorage.setItem("@PiuPiuwer:token", token)
-		localStorage.setItem("@PiuPiuwer:user", JSON.stringify(user))
-	  setUserData(response.data)
+		setCookie(undefined,"@PiuPiuwer:token", token, {
+			maxAge: 60 * 60 //1 hora
+		})
+	  setUserData({user: user, token: token})
 		console.log(token, user)
 	};
 
 	return (
 		<Wrapper>
 			<OutWrapEsq>
-				<WrapEsq src={fundoLoginEsq}/>
 					<Logo/>
 			</OutWrapEsq>
 			<OutWrapDir>

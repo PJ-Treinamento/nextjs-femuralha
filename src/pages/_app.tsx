@@ -5,13 +5,13 @@ import { AuthProvider } from '../context/AuthContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <>
-            <AuthProvider>
-                <AppProvider>
+        <>          
+            <AppProvider>
+                <AuthProvider>
                     <GlobalStyle />
                     <Component {...pageProps} />
-                </AppProvider>
-            </AuthProvider>
+                </AuthProvider>
+            </AppProvider>
         </>
     );
 }

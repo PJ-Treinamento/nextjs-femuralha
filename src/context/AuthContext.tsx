@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import api from "../services/api";
-
+import Router from 'next/router'
+import {parseCookies, setCookie} from 'nookies'
 
 interface AuthContextData {
   signed: boolean;
@@ -47,18 +48,17 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [userData, setUserData] = useState<IUserData>({} as IUserData)
-    useEffect (()=>{
-      async function loadUsers() {
-        const token = await localStorage.getItem('@PiuPiuwer:token')
-        const user = await localStorage.getItem('@PiuPiuwer:user')
 
-        if ( user && token){
+    useEffect (()=>{
+      const { '@PiuPiuwer:token': token } = parseCookies()
+      async function loadUsers() {
+        if (token){
           api.defaults.headers.Authorization = `Bearer ${token}`
-          setUserData({user: JSON.parse(user), token: token})
           console.log('CARALHO MANO DEU CERTO')
+          Router.push('/Feed')
         }
       }
-      loadUsers
+      loadUsers()
     }, [])
   
   return (

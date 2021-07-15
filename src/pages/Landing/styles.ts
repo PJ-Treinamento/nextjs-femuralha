@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import fundoLoginEsq from '../../assets/images/esq-login_r.svg'
 import fundoLoginDir from '../../assets/images/dir-login.svg'
 import logoGalinha from '../../assets/images/Galinha.svg'
 import Image from 'next/Image'
@@ -20,6 +20,7 @@ export const WrapEsq = styled(Image)`
 	}
 `
 export const OutWrapEsq = styled.div`
+	background-image: url(${fundoLoginEsq.src});
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -33,7 +34,7 @@ export const OutWrapEsq = styled.div`
 	}
 `
 export const OutWrapDir = styled.div`
-	background-image: url(${fundoLoginDir}) ;
+	background-image: url(${fundoLoginDir.src}) ;
 	position: relative;
 	height: 1024px;
 	padding-right: 50px;
@@ -77,7 +78,7 @@ export const Wrapper_Button = styled.div`
 							 
 `
 export const Logo = styled.div`
-//							 background: url(${logoGalinha});
+							 background: url(${logoGalinha.src});
 							 background-size: 50px 50px;
 							 margin-top: 20px;
 							 display: none;
