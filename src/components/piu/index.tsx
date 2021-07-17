@@ -1,18 +1,20 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import api from "../../services/api";
+import Image from "next/Image";
+import Galinha from '../../assets/images/Galinha.svg'
 
 import { Wrapper, 
   Piu_interaction,
   Piu_comments,
   Piu_content,
-  Profile_pic,
+  ProfPic,
   Like_btn,
   Share_btn,
   Delete,
-  Delete_div
+  Delete_div,
+  WrapFlex
      } from "./styles";
-
 export interface Piu {
 	id: string;
 	user: User;
@@ -78,16 +80,15 @@ const PiuComp: React.FC <Piu> = ({id , likes, text, user }) => {
     {'piu_id':id},
     {headers: { authorization: `Bearer ${token}` }})
   }
-
+  let photo = user.photo
+  if(photo === '.....') photo = Galinha
   return(
     <Wrapper>
       <Piu_interaction>
-        <img className='Profile-pic' src={user.photo}/>
-        <div className='Wrap-flex'>
-          <Like_btn onClick={piuLike}/>
-          <p className='Count'>{likes.length + likeCount}</p>
-          <Share_btn onClick={piuFav}/>
-        </div>
+        <ProfPic src={photo ? photo : Galinha} width={30} height={30}/>
+        <Like_btn onClick={piuLike}/>
+        <p className='Count'>{likes.length + likeCount}</p>
+        <Share_btn onClick={piuFav}/>
       </Piu_interaction>
       <Piu_content>
         <h2>{user.username}</h2>

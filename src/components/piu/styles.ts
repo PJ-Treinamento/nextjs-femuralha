@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Retweet from '../../assets/images/retweet.svg'
 import Like from '../../assets/images/like.svg'
+import Image from 'next/Image';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -15,8 +16,9 @@ export const Piu_interaction = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 40px;
+  height:142px;
 `
 export const Piu_content = styled.div`
   display: flex;
@@ -89,4 +91,13 @@ export const Delete = styled.button`
   width: 30px;
   font: 600 10px Montserrat;
   margin-right: 35px;
+`
+export const ProfPic = styled(Image)`
+  display: flex;
+  border-radius: 50%;
+`
+export const WrapFlex = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 `

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import api from "../services/api";
 import Router from 'next/router'
-import {parseCookies, setCookie} from 'nookies'
+import {parseCookies, destroyCookie} from 'nookies'
 
 interface AuthContextData {
   signed: boolean;
@@ -50,12 +50,15 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [userData, setUserData] = useState<IUserData>({} as IUserData)
 
     useEffect (()=>{
-      const { '@PiuPiuwer:token': token } = parseCookies()
+    const { '@PiuPiuwer:token': token } = parseCookies()
       async function loadUsers() {
         if (token){
           api.defaults.headers.Authorization = `Bearer ${token}`
-          console.log('CARALHO MANO DEU CERTO')
           Router.push('/Feed')
+        }
+        else{
+            destroyCookie(undefined,"@PiuPiuwer:token")
+            Router.push('/')
         }
       }
       loadUsers()

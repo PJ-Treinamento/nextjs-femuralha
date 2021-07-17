@@ -4,7 +4,8 @@ import PiuComp from '../../components/piu';
 import api from '../../services/api';
 import AuthContext from '../../context/AuthContext';
 import { Piu } from '../../components/piu';
-import galinha from '../../assets/images/Galinha.svg'
+import Image from 'next/Image';
+import Input from '../../components/input';
 
 import { 
   Button_feed,
@@ -20,14 +21,14 @@ import {
   Search_input,
   ProfPic
   } from './styles';
-import Input from '../../components/input';
 
 function Feed() {
-  const {token} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
   const [pius, setPius] = useState <Piu[]> ([])
   const [values, setValues] = useState<{ text: string}>({ text: '' })
 
   useEffect(() =>{
+    console.log(user)
     const fetchData = async () => {
       const response = await api.get('/pius')
       setPius(response.data)
@@ -59,7 +60,7 @@ function Feed() {
   const [searchTerm, setSearchTerm] = useState('')
 
   return (
-    <div>
+    <>
       <Header>
     <Galinha />
     <Wrapper_right>
@@ -80,7 +81,6 @@ function Feed() {
         </Aside>
         <Timeline>
           <PiuPost>
-            <ProfPic src={galinha} />
             <Input id='text'
             type='text'
                 name='text'
@@ -104,7 +104,7 @@ function Feed() {
         </Timeline>
       </Wrapper_down>
     </Wrap>
-  </div>
+  </>
   )
 }
 

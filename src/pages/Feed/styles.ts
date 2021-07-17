@@ -9,8 +9,6 @@ export const Wrap = styled.div`
   justify-content: space-around;
 `
 export const ProfPic = styled(Image)`
-  height: 35px;
-  width: 35px;
   display: flex;
 `
 export const Header = styled.div`
@@ -27,19 +25,11 @@ export const Wrapper_right = styled.div`
   align-items: center;
 `
 export const Galinha = styled.div`
-  background: url(${logoGalinha});
+  background: url(${logoGalinha.src});
   background-size: 60px 60px;
   display: flex;
   height: 60px;
   width: 60px;
-  animation: rotation 5s infinite linear;
-  @keyframes rotation {
-  from {
-    transform: rotate3d(0,0,0,0deg);
-  }
-  to {
-    transform: rotate3d(0,1,0,359deg);
-  }}
 `
 export const Button_feed = styled.button`
   display: flex;
@@ -119,3 +109,11 @@ color:#667581;
 border-radius: 16px;
 margin-left: 5px;
 `
+/*animation: rotation 5s infinite linear;
+@keyframes rotation {
+from {
+  transform: rotate3d(0,0,0,0deg);
+}
+to {
+  transform: rotate3d(0,1,0,359deg);
+}}*/
